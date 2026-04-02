@@ -1,6 +1,6 @@
 body {
     background-color: #050505;
-    color: #00ff41; /* Ma trận green */
+    color: #00ff41; /* Green Matrix */
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
@@ -8,30 +8,34 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    cursor: block;
 }
 
 .terminal-container {
-    width: 90%;
-    max-width: 800px;
+    width: 95%;
+    height: 85vh;
+    max-width: 900px;
     background: #000;
-    border: 1px solid #333;
+    border: 1px solid #00ff41;
     border-radius: 6px;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
+    display: flex;
+    flex-direction: column;
 }
 
 .terminal-header {
-    background: #1a1a1a;
-    padding: 8px 12px;
+    background: #111;
+    padding: 10px 15px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #333;
 }
 
 .dot {
-    height: 10px;
-    width: 10px;
+    height: 12px;
+    width: 12px;
     border-radius: 50%;
-    margin-right: 6px;
+    margin-right: 8px;
 }
 
 .red { background: #ff5f56; }
@@ -39,19 +43,22 @@ body {
 .green { background: #27c93f; }
 
 .header-title {
-    color: #888;
-    font-size: 12px;
+    color: #fff;
+    font-size: 13px;
     margin-left: 10px;
+    opacity: 0.8;
 }
 
 .terminal-body {
-    padding: 20px;
+    padding: 25px;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.8;
+    overflow-y: auto; /* Cho phép cuộn nếu data quá dài */
+    flex-grow: 1;
 }
 
 .line {
-    margin: 5px 0;
+    margin: 6px 0;
     white-space: nowrap;
     overflow: hidden;
     width: 0;
@@ -62,20 +69,22 @@ body {
 .separator {
     border: 0;
     border-top: 1px solid #333;
-    margin: 15px 0;
+    margin: 20px 0;
 }
 
 .data-block {
-    background: rgba(0, 255, 65, 0.05);
-    padding: 15px;
+    background: rgba(0, 255, 65, 0.08);
+    padding: 20px;
     border-radius: 4px;
+    border: 1px solid rgba(0, 255, 65, 0.2);
 }
 
 .label {
     color: #fff;
     text-transform: uppercase;
-    font-size: 11px;
-    margin-bottom: 5px;
+    font-size: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
 }
 
 .encoded-text {
@@ -85,16 +94,21 @@ body {
     letter-spacing: 0.5px;
 }
 
+.cursor {
+    display: inline-block;
+    color: #00ff41;
+    font-weight: bold;
+}
+
 /* Animations */
 @keyframes typing { from { width: 0 } to { width: 100% } }
 @keyframes blink { 50% { opacity: 0 } }
 
 .typing-1 { animation: typing 1s steps(40) forwards; }
-.typing-2 { animation: typing 1s steps(40) forwards 1s; }
-.typing-3 { animation: typing 1s steps(40) forwards 2s; color: #ff5f56; }
-.typing-4 { animation: typing 1s steps(40) forwards 3s; }
+.typing-2 { animation: typing 1.5s steps(40) forwards 1s; }
+.typing-3 { animation: typing 1.2s steps(40) forwards 2.5s; color: #ff5f56; font-weight: bold; }
+.typing-4 { animation: typing 1.5s steps(40) forwards 3.7s; }
 
-.cursor {
-    display: inline-block;
-    animation: blink 1s infinite;
+.blinking-cursor {
+    animation: blink 0.9s infinite;
 }

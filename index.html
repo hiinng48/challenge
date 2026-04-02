@@ -6,29 +6,54 @@
     <title>HUST_EXTERNAL_SOURCE_DETECTED</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onclick="enableFullScreen()">
     <div class="terminal-container">
         <div class="terminal-header">
             <span class="dot red"></span>
             <span class="dot yellow"></span>
             <span class="dot green"></span>
-            <span class="header-title">system_recovery_console.exe</span>
+            <span class="header-title">root@hust-k69:~# system_recovery.exe</span>
         </div>
-        <div class="terminal-body">
-            <p class="line typing-1">> INITIALIZING DECRYPTION PROTOCOL...</p>
+        <div class="terminal-body" id="terminal-body">
+            <p class="line typing-1">> INITIALIZING DECRYPTION PROTOCOL... <span class="blink">_</span></p>
             <p class="line typing-2">> ACCESSING HUST_SIS_DATABASE... <span class="status-ok">DONE.</span></p>
             <p class="line typing-3">> WARNING: UNORTHORIZED ACCESS DETECTED. IP LOGGED.</p>
             <p class="line typing-4">> EXTRACTING DATA LAYER V4 [ENCODED_BY_K69]...</p>
             
-            <hr class="separator">
-
-            <div class="data-block">
-                <p class="label">base64 encoded</p>
-                <p class="encoded-text">aGV4IGVuY29kZWQKNzI2Rjc0MzEzMzIwNjU2RTYzNkY2NDY1NjQwRDBBNjg2NTc5MjA3MjYxNzA2MjcxNzI3MTIwNzM2RjI1MzIzMDZGNzY3MDc1MkU2Mzc1Njg2MjYxNzQyRTM0MzIzMDMwMzEzNDI1MzIzMDc2NjE2NjY3NkUyNTMyMzAyNTMyNEYyNTMyMzA2Nzc1NjU3MjZFNzE2NjI1MzIzMDVGNkY2Mzc1Njg2MjYxNzQzNjMwMzMyNTMwNEUyNTMwNEU2MTc0Njg2QzcyNjEyNTMyMzA2Nzc1NzYyNTMyMzA2Rjc2NzA3NTI1MzIzMDYzNzU2ODYyNjE3NDI1MzA0RTI1MzA0RTMwMzYyNTMyNTMzMDMzMjUzMjUzMzIzMDMwMzYyNTMwNEUyNTMwNEU2Nzc1NjM2NzI1MzIzMDc1NjI2MTc0MjUzMjMwNzk3NjYxNzUyNTMyMzAyRDI1MzIzMDc1NkUyNTMyMzA2Nzc2NjE3NTI1MzA0RTI1MzA0RTdBNjI3NjI1MzIzMDY3NjU2ODYyNjE3NDI1MzIzMDMwMzMyNTMyMzA3ODM2Mzk=</p>
-            </div>
-
-            <p class="cursor">_</p>
-        </div>
+            <div id="output"></div> </div>
     </div>
+
+    <script>
+        // Hàm giả lập Toàn màn hình (Kích hoạt khi click)
+        function enableFullScreen() {
+            let elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari, Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+        }
+
+        // Tự động hiển thị kết quả sau khi hiệu ứng chữ chạy kết thúc
+        setTimeout(() => {
+            const output = document.getElementById('output');
+            const terminalBody = document.getElementById('terminal-body');
+
+            const content = `
+                <hr class="separator">
+                <div class="data-block">
+                    <p class="label">base64 encoded</p>
+                    <p class="encoded-text">aGV4IGVuY29kZWQKNzI2Rjc0MzEzMzIwNjU2RTYzNkY2NDY1NjQwRDBBNjg2NTc5MjA3MjYxNzA2MjcxNzI3MTIwNzM2RjI1MzIzMDZGNzY3MDc1MkU2Mzc1Njg2MjYxNzQyRTM0MzIzMDMwMzEzNDI1MzIzMDc2NjE2NjY3NkUyNTMyMzAyNTMyNEYyNTMyMzA2Nzc1NjU3MjZFNzE2NjI1MzIzMDVGNkY2Mzc1Njg2MjYxNzQzNjMwMzMyNTMwNEUyNTMwNEU2MTc0Njg2QzcyNjEyNTMyMzA2Nzc1NzYyNTMyMzA2Rjc2NzA3NTI1MzIzMDYzNzU2ODYyNjE3NDI1MzA0RTI1MzA0RTMwMzYyNTMyNTMzMDMzMjUzMjUzMzIzMDMwMzYyNTMwNEUyNTMwNEU2Nzc1NjM2NzI1MzIzMDc1NjI2MTc0MjUzMjMwNzk3NjYxNzUyNTMyMzAyRDI1MzIzMDT1NkUyNTMyMzA2Nzc2NjE3NTI1MzA0RTI1MzA0RTdBNjI3NjI1MzIzMDY3NjU2ODYyNjE3NDI1MzIzMDMwMzMyNTMyMzA3ODM2Mzk=</p>
+                </div>
+                <p class="cursor blinking-cursor">_</p>
+            `;
+
+            output.innerHTML = content;
+            // Tự động cuộn xuống cuối
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }, 5000); // 5 giây sau khi trang load (sau khi typing-4 kết thúc)
+    </script>
 </body>
 </html>
